@@ -1,0 +1,27 @@
+// tailwindcss modules
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+// https://github.com/ant-design/ant-design/issues/13074
+@layer base {
+  svg {
+    display: inline;
+    vertical-align: baseline;
+  }
+}
+
+body {
+  overflow: hidden;
+}
+
+// antd styling modules - customize variables purposes
+@import "~antd/dist/reset.css";
+
+@import "./_variables.less";
+@import "./_globals.less";
+@import "./components/_all.less";
+
+.ant-timeline-item-head-custom {
+  background: inherit!important;
+}
