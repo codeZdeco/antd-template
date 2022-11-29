@@ -1,10 +1,9 @@
 import { RouteObject, Outlet } from "react-router-dom";
-import { NotFoundPage } from "pages";
+import { NotFoundPage, LoginPage } from "pages";
 import { paths } from "constant";
 import { AppLayout } from "components/layout";
 import React from "react";
 
-const Login = React.lazy(() => import("pages/HomePage"));
 const Home = React.lazy(() => import("pages/HomePage"));
 const Profile = React.lazy(() => import("pages/ProfilePage"));
 const Setting = React.lazy(() => import("pages/SettingPage"));
@@ -56,8 +55,8 @@ const routes: RouteObject[] = [
     ],
   },
   {
-    path: "/login",
-    element: <Login />,
+    path: paths.login,
+    element: <LoginPage />,
   },
 ];
 
