@@ -12,10 +12,15 @@ import {
   ReloadOutlined,
   EllipsisOutlined,
 } from "@ant-design/icons";
+import { useHelmet } from "hooks";
 
 export interface HomePageProps {}
 
 const Page: React.FC<HomePageProps> = (props) => {
+  useHelmet({
+    title: "Home Page",
+  });
+
   return (
     <PlainLayout
       HeaderProps={{

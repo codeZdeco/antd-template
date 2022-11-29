@@ -13,12 +13,16 @@ import {
 } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import { MenuProps } from "components/shared/Menu";
+import { useHelmet } from "hooks";
 
 export interface SettingPageProps {
   children?: React.ReactNode;
 }
 
 const Page: React.FC<SettingPageProps> = (props) => {
+  useHelmet({
+    title: "Setting",
+  });
   const navigate = useNavigate();
 
   const handleNavigate = (url: string) => navigate(url);

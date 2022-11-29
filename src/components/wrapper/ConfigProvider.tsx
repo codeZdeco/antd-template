@@ -1,49 +1,37 @@
-import { ConfigProvider, theme } from "antd";
-
-const { defaultAlgorithm, darkAlgorithm } = theme;
+import { ConfigProvider } from "antd";
+import { useAppSelector } from "store";
+import { themes } from "configs";
+import { useMemo } from "react";
+import { Global } from "@emotion/react";
 
 export interface XConfigProviderProps {
   children?: React.ReactNode;
 }
 
 const XConfigProvider = (props: XConfigProviderProps) => {
+  const { selected: selectedThemeKey, ...restConfigProps } = useAppSelector(
+    (state) => state.app.theme,
+  );
+
+  const selectedTheme = useMemo(
+    () => themes[selectedThemeKey],
+    [selectedThemeKey],
+  );
+
   return (
-    <ConfigProvider
-      theme={{
-        algorithm: [defaultAlgorithm, darkAlgorithm],
-        token: {
-          colorBgLayout: "#22272e",
-          colorPrimary: "#316dca",
-          colorBgBase: "#2d333b",
-          colorBorder: "#464e58",
-          colorSuccess: "#9be9a8",
-          colorError: "#ce504a",
-        },
-        components: {
-          Button: {
-            boxShadow: "none",
+    <>
+      <Global
+        styles={{
+          ".ant-layout-sider-trigger": {
+            backgroundColor:
+              selectedTheme && selectedTheme.components?.Layout?.colorBgTrigger,
           },
-          Layout: {
-            colorBgHeader: "#2d333b",
-            colorBgTrigger: "#464e58",
-          },
-          Card: {
-            colorBgLayout: "#282828",
-          },
-          Input: {
-            colorBgContainer: "#1c2128",
-          },
-          Select: {
-            colorBgContainer: "#1c2128",
-          },
-          DatePicker: {
-            colorBgContainer: "#1c2128",
-          },
-        },
-      }}
-    >
-      {props.children}
-    </ConfigProvider>
+        }}
+      />
+      <ConfigProvider {...restConfigProps} theme={selectedTheme}>
+        {props.children}
+      </ConfigProvider>
+    </>
   );
 };
 
