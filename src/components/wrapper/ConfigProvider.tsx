@@ -9,13 +9,21 @@ export interface XConfigProviderProps {
 }
 
 const XConfigProvider = (props: XConfigProviderProps) => {
-  const { selected: selectedThemeKey, ...restConfigProps } = useAppSelector(
-    (state) => state.app.theme,
-  );
+  const {
+    selected: selectedThemeKey,
+    colorPrimary,
+    ...restConfigProps
+  } = useAppSelector((state) => state.app.theme);
 
   const selectedTheme = useMemo(
-    () => themes[selectedThemeKey],
-    [selectedThemeKey],
+    () => ({
+      ...themes[selectedThemeKey],
+      token: {
+        ...themes[selectedThemeKey].token,
+        colorPrimary,
+      },
+    }),
+    [selectedThemeKey, colorPrimary],
   );
 
   return (

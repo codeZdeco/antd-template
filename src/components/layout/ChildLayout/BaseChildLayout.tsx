@@ -21,7 +21,8 @@ import { PageHeader } from "components/shared";
 
 const { Footer } = Layout;
 
-export interface BaseChildLayoutProps {
+export interface BaseChildLayoutProps
+  extends React.HTMLAttributes<HTMLElement> {
   /**
    * Ref for HeaderProps: https://ant.design/components/page-header/#header
    */
@@ -30,7 +31,6 @@ export interface BaseChildLayoutProps {
    * Ref for FooterProps: N/A
    */
   FooterProps?: React.HTMLAttributes<HTMLElement>;
-  children?: React.ReactElement;
 }
 
 const XLayout: React.FC<BaseChildLayoutProps> = (props) => {
@@ -44,7 +44,7 @@ const XLayout: React.FC<BaseChildLayoutProps> = (props) => {
           className={clsx(HeaderProps.className, "px-0")}
         />
       )}
-      <div className='overflow-x-hidden overflow-y-auto'>{children}</div>
+      <div className='overflow-x-hidden overflow-y-auto h-full'>{children}</div>
       {FooterProps && <Footer {...FooterProps} />}
     </>
   );

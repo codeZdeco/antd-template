@@ -2,14 +2,10 @@ import BaseLayout, { BaseChildLayoutProps } from "./BaseChildLayout";
 
 export type BaseLayoutProps<T extends unknown> = T & BaseChildLayoutProps;
 
-function withBaseChildLayout<T>(
-  Page: React.ComponentType<T & BaseChildLayoutProps>
-): React.FC<BaseLayoutProps<any>> {
-  const RootPage = (props: T & BaseChildLayoutProps) => {
-    const { FooterProps, HeaderProps } = props;
-
+function withBaseChildLayout<T>(Page: React.FC<T>): React.FC<T> {
+  const RootPage: typeof Page = (props: T) => {
     return (
-      <BaseLayout FooterProps={FooterProps} HeaderProps={HeaderProps}>
+      <BaseLayout {...props}>
         <Page {...(props as any)} />
       </BaseLayout>
     );
