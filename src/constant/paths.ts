@@ -8,6 +8,8 @@ const instance: PathType = {
   login: "login",
   event: "events",
   profile: "profile",
+  account: "account",
+  appearance: "appearance",
   notification: "notifications",
   setting: "settings",
 };

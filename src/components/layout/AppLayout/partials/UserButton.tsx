@@ -79,7 +79,7 @@ function UserButton() {
       key: "setting",
       label: "Settings",
       icon: <SettingOutlined />,
-      onClick: () => handleNavigate(paths.setting),
+      onClick: () => handleNavigate(`${paths.setting}/${paths.account}`),
     },
     null,
     {

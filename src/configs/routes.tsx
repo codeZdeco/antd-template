@@ -10,6 +10,9 @@ const Setting = React.lazy(() => import("pages/SettingPage"));
 const AccountSetting = React.lazy(
   () => import("pages/SettingPage/subs/AccountSettingPage"),
 );
+const AppearanceSetting = React.lazy(
+  () => import("pages/SettingPage/subs/AppearanceSettingPage"),
+);
 
 const extendedRoutes: RouteObject[] = [
   {
@@ -31,8 +34,12 @@ const extendedRoutes: RouteObject[] = [
     children: [
       {
         index: true,
-        path: "account",
+        path: paths.account,
         element: <AccountSetting />,
+      },
+      {
+        path: paths.appearance,
+        element: <AppearanceSetting />,
       },
     ],
   },

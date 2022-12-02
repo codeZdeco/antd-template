@@ -6,12 +6,13 @@ export interface MenuProps {
   size?: "small" | "large" | "medium";
   direction?: "horizontal" | "vertical";
   items?: (ButtonProps & { key?: string })[];
+  selected?: string;
 }
 
 const { Text } = Typography;
 
 function Menu(props: MenuProps) {
-  const { title, size, direction = "vertical", items } = props;
+  const { title, size, direction = "vertical", items, selected } = props;
 
   const getDefaultItemProps: (props: ButtonProps) => ButtonProps = (
     itemProps,
@@ -27,7 +28,13 @@ function Menu(props: MenuProps) {
   return (
     <Space direction={direction} className='w-full'>
       {title && <Text type='secondary'>{title}</Text>}
-      {items && items.map((item) => <Button {...getDefaultItemProps(item)} />)}
+      {items &&
+        items.map((item) => (
+          <Button
+            {...getDefaultItemProps(item)}
+            type={selected === item.key ? "default" : "text"}
+          />
+        ))}
     </Space>
   );
 }

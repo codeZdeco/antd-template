@@ -11,7 +11,7 @@ import {
   IdcardOutlined,
   SafetyCertificateOutlined,
 } from "@ant-design/icons";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { MenuProps } from "components/shared/Menu";
 import { useHelmet } from "hooks";
 
@@ -21,9 +21,11 @@ export interface SettingPageProps {
 
 const Page: React.FC<SettingPageProps> = (props) => {
   useHelmet({
-    title: "Setting",
+    title: "Taimi - Setting",
   });
   const navigate = useNavigate();
+  const location = useLocation();
+  console.log(location.pathname);
 
   const handleNavigate = (url: string) => navigate(url);
 
@@ -41,6 +43,7 @@ const Page: React.FC<SettingPageProps> = (props) => {
           key: "/settings/appearance",
           children: "Appearance",
           icon: <FormatPainterOutlined />,
+          onClick: () => handleNavigate("appearance"),
         },
         {
           key: "/settings/accessibility",
@@ -101,12 +104,12 @@ const Page: React.FC<SettingPageProps> = (props) => {
               const isLastElement = index === menus.length - 1;
 
               if (isLastElement) {
-                return <Menu {...value} />;
+                return <Menu selected={location.pathname} {...value} />;
               }
 
               return (
                 <>
-                  <Menu {...value} />
+                  <Menu selected={location.pathname} {...value} />
                   <Divider className='m-0' />
                 </>
               );
